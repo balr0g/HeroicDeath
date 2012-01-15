@@ -16,7 +16,7 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import com.herocraftonline.squallseed31.heroicdeath.HeroicDeathListener.RespawnListener;
 
@@ -44,7 +44,7 @@ public class HeroicDeath extends JavaPlugin
 	public static HeroicDeathMessages DeathMessages = new HeroicDeathMessages();
 	public static HeroicDeathItems Items = new HeroicDeathItems();
 	
-	public Configuration config;
+	public FileConfiguration config;
 	public static String messageColor;
 	public static String nameColor;
 	public static String itemColor;
@@ -71,7 +71,7 @@ public class HeroicDeath extends JavaPlugin
 
   public void onEnable()
   {
-	this.config = getConfiguration();
+	this.config = getConfig();
 	pdfFile = getDescription();
 	name = pdfFile.getName();
 	version = pdfFile.getVersion();
@@ -105,10 +105,10 @@ public class HeroicDeath extends JavaPlugin
     mobWolf = this.config.getString("monsters.wolf", "Wolf");
     useDisplayName = this.config.getBoolean("options.useDisplayName", false);
     serverBroadcast = this.config.getBoolean("options.serverBroadcast", true);
-    quietWorlds = this.config.getStringList("options.worlds.quiet", new ArrayList<String>());
-    loudWorlds = this.config.getStringList("options.worlds.loud", new ArrayList<String>());
+    //quietWorlds = this.config.getStringList("options.worlds.quiet", new ArrayList<String>());
+    //loudWorlds = this.config.getStringList("options.worlds.loud", new ArrayList<String>());
     
-    saveConfig();
+   // saveConfig();
     try {
     	if (logData)
     		this.dataLog = new File(dataFolder, dLog);
@@ -211,7 +211,7 @@ public class HeroicDeath extends JavaPlugin
 			}
 	  }
   }
-  
+  /*
   private void saveConfig() {
 	  this.config.setProperty("colors.message", this.config.getString("colors.message", "RED"));
 	  this.config.setProperty("colors.name", this.config.getString("colors.name", "DARK_AQUA"));
@@ -240,7 +240,7 @@ public class HeroicDeath extends JavaPlugin
 
 	  this.config.save();
   }
-  
+  */
   public static String getPlayerName(Player p) {
 	  if (useDisplayName) return p.getDisplayName();
 	  return p.getName();

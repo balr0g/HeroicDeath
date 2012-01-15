@@ -14,9 +14,9 @@
   <issueManagement>
   </issueManagement>
   <scm>
-  	<connection>scm:git:git://github.com/SquallSeeD31/HeroicDeath.git</connection>
-  	<developerConnection>scm:git:git@github.com:SquallSeeD31/HeroicDeath.git</developerConnection>
-  	<url>https://github.com/SquallSeeD31/HeroicDeath/tree/master/</url>
+  	<connection>scm:git:git://github.com/darkwarriors/HeroicDeath.git</connection>
+  	<developerConnection>scm:git:git@github.com:darkwarriors/HeroicDeath.git</developerConnection>
+  	<url>https://github.com/darkwarriors/HeroicDeath/tree/master/</url>
   </scm>
   <build>
     <finalName>${project.artifactId}</finalName>
@@ -58,13 +58,16 @@
   	</plugins>
   </build>
   <dependencies>
-    <dependency>
-      <groupId>org.bukkit</groupId>
-      <artifactId>bukkit</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <type>jar</type>
-      <scope>compile</scope>
-    </dependency>
+ 		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.0.1-R2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>craftbukkit</artifactId>
+			<version>1.0.1-R2-SNAPSHOT</version>
+		</dependency>
   </dependencies>
 
 
