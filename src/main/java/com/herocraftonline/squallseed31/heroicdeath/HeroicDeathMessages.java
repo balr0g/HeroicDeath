@@ -28,6 +28,10 @@ public class HeroicDeathMessages
   public ArrayList<String> SpiderMessages = new ArrayList<String>();
   public ArrayList<String> SkeletonMessages = new ArrayList<String>();
   public ArrayList<String> GiantMessages = new ArrayList<String>();
+  public ArrayList<String> CaveSpiderMessages = new ArrayList<String>();
+  public ArrayList<String> BlazeMessages = new ArrayList<String>();
+  public ArrayList<String> MagmaCubeMessages = new ArrayList<String>();
+  public ArrayList<String> SilverfishMessages = new ArrayList<String>();
   public ArrayList<String> WolfMessages = new ArrayList<String>();
   public ArrayList<String> LavaMessages = new ArrayList<String>();
   public ArrayList<String> SuffocationMessages = new ArrayList<String>();
@@ -206,6 +210,18 @@ public class HeroicDeathMessages
           case Giant:
         	  this.GiantMessages.add(thisLine);
         	  break;
+          case Silverfish:
+        	  this.SilverfishMessages.add(thisLine);
+        	  break;
+          case Blaze:
+        	  this.BlazeMessages.add(thisLine);
+        	  break;
+          case MagmaCube:
+        	  this.MagmaCubeMessages.add(thisLine);
+        	  break;
+          case CaveSpider:
+        	  this.CaveSpiderMessages.add(thisLine);
+        	  break;              
           case Dispenser:
         	this.DispenserMessages.add(thisLine);
         	break;
@@ -316,7 +332,7 @@ public class HeroicDeathMessages
 	      }
 	    }
 	  }
-      HeroicDeath.log.info("Default message file created for HeroicDeath.");
+    HeroicDeath.log.info("Default message file created for HeroicDeath.");
     this.DrownMessages.add("%d drowned");
     this.CactusMessages.add("%d poked a cactus, but the cactus poked back.");
     this.FireMessages.add("%d burned to death");
@@ -339,7 +355,8 @@ public class HeroicDeathMessages
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
-    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, 
+    Spider, Skeleton, Giant, Wolf, CaveSpider, Blaze, 
+    MagmaCube, Silverfish, Lava, Other, Suffocation, 
     Dispenser, Lightning, Suicide, Starvation;
   }
 }

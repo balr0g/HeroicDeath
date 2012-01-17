@@ -15,6 +15,10 @@ import org.bukkit.entity.Spider;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
+import org.bukkit.entity.CaveSpider;
+import org.bukkit.entity.Silverfish;
+import org.bukkit.entity.Blaze;
+import org.bukkit.entity.MagmaCube;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -107,6 +111,14 @@ public class HeroicDeathListener extends EntityListener {
 		 attackerName = plugin.mobSlime;
 	 } else if (damager instanceof Wolf) {
 		 attackerName = plugin.mobWolf;
+         } else if (damager instanceof Blaze) {
+		 attackerName = plugin.mobBlaze;      
+         } else if (damager instanceof MagmaCube) {
+		 attackerName = plugin.mobMagmaCube;   
+         } else if (damager instanceof CaveSpider) {
+		 attackerName = plugin.mobCaveSpider;
+         } else if (damager instanceof Silverfish) {
+		 attackerName = plugin.mobSilverfish;               
 	 } else {
 		 attackerName = plugin.mobMonster;
 	 }
@@ -235,6 +247,14 @@ public class HeroicDeathListener extends EntityListener {
 					 killString = getMessage(HeroicDeath.DeathMessages.GiantMessages, dc);
 				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobWolf) && !HeroicDeath.DeathMessages.WolfMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.WolfMessages, dc);
+				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobBlaze) && !HeroicDeath.DeathMessages.BlazeMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.BlazeMessages, dc);
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobMagmaCube) && !HeroicDeath.DeathMessages.MagmaCubeMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.MagmaCubeMessages, dc);
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSilverfish) && !HeroicDeath.DeathMessages.SilverfishMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.SilverfishMessages, dc);
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobCaveSpider) && !HeroicDeath.DeathMessages.CaveSpiderMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.CaveSpiderMessages, dc);                                                     
 				 else
 					 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
 			 }
