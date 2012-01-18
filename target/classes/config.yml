@@ -72,6 +72,12 @@ monsters:
     wolf: Wolf
     unknown: Unknown
     giant: Giant
+    blaze: Blaze
+    magmacube: MagmaCube
+    silverfish: Silverfish
+    cavespider: CaveSpider
+    enderman: Enderman
+    enderdragon: EnderDragon
 #Options
 ##useDisplayName: Set to true if you want HeroicDeath to display the player's display name instead of their fixed character name.
 ##serverBroadcast: Set to FALSE if you want HeroicDeath to only broadcast its messages in the world they belong to.

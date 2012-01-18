@@ -16,16 +16,15 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.configuration.file.FileConfiguration;
 
-//import com.herocraftonline.squallseed31.heroicdeath.HeroicDeathListener.RespawnListener;
+import com.herocraftonline.squallseed31.heroicdeath.HeroicDeathListener.RespawnListener;
 
 public class HeroicDeath extends JavaPlugin
 {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	
 	private final HeroicDeathListener listener = new HeroicDeathListener(this);
-	//private final RespawnListener playerListener = listener.new RespawnListener();
+	private final RespawnListener playerListener = listener.new RespawnListener();
 	
 	public PluginDescriptionFile pdfFile;
 	public String name;
@@ -63,6 +62,8 @@ public class HeroicDeath extends JavaPlugin
         public String mobMagmaCube;
         public String mobSilverfish;
         public String mobCaveSpider;
+        public String mobEnderman;
+        public String mobEnderDragon;
 	public static boolean useDisplayName;
 	public boolean serverBroadcast;
 	public List<String> quietWorlds;
@@ -84,8 +85,8 @@ public class HeroicDeath extends JavaPlugin
     PluginManager pm = getServer().getPluginManager();
     //pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.ENTITY_DEATH, this.listener, Event.Priority.Monitor, this);
-    //pm.registerEvent(Event.Type.PLAYER_RESPAWN, this.playerListener, Event.Priority.Monitor, this);
-    //pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Monitor, this);
+    pm.registerEvent(Event.Type.PLAYER_RESPAWN, this.playerListener, Event.Priority.Monitor, this);
+    pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Monitor, this);
 
     config = new HeroicDeathConfig(new File(getDataFolder(), "config.yml"), this);
     
@@ -114,6 +115,8 @@ public class HeroicDeath extends JavaPlugin
     mobCaveSpider = this.config.getString("monsters.savespider", "SaveSpider");
     mobMagmaCube = this.config.getString("monsters.mobmagmacube", "MagmaCube");
     mobSilverfish = this.config.getString("monsters.silverfish", "Silverfish");
+    mobEnderman = this.config.getString("monsters.enderman", "Enderman");
+    mobEnderDragon = this.config.getString("monsters.enderdragon", "Enderman");
     useDisplayName = this.config.getBoolean("options.useDisplayName", false);
     serverBroadcast = this.config.getBoolean("options.serverBroadcast", true);
     quietWorlds = this.config.getStringList("options.worlds.quiet");

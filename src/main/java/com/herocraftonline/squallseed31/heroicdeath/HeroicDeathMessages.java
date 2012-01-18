@@ -32,6 +32,8 @@ public class HeroicDeathMessages
   public ArrayList<String> BlazeMessages = new ArrayList<String>();
   public ArrayList<String> MagmaCubeMessages = new ArrayList<String>();
   public ArrayList<String> SilverfishMessages = new ArrayList<String>();
+  public ArrayList<String> EndermanMessages = new ArrayList<String>();
+  public ArrayList<String> EnderDragonMessages = new ArrayList<String>();
   public ArrayList<String> WolfMessages = new ArrayList<String>();
   public ArrayList<String> LavaMessages = new ArrayList<String>();
   public ArrayList<String> SuffocationMessages = new ArrayList<String>();
@@ -129,6 +131,18 @@ public class HeroicDeathMessages
             currentParse = HeroicDeathMessages.ParseType.Spider;
         else if (thisLine.equalsIgnoreCase(":skeleton"))
             currentParse = HeroicDeathMessages.ParseType.Skeleton;
+        else if (thisLine.equalsIgnoreCase(":enderman"))
+            currentParse = HeroicDeathMessages.ParseType.Enderman;
+        else if (thisLine.equalsIgnoreCase(":enderdragon"))
+            currentParse = HeroicDeathMessages.ParseType.EnderDragon;
+        else if (thisLine.equalsIgnoreCase(":silverfish"))
+            currentParse = HeroicDeathMessages.ParseType.Silverfish;
+        else if (thisLine.equalsIgnoreCase(":cavespider"))
+            currentParse = HeroicDeathMessages.ParseType.CaveSpider;
+        else if (thisLine.equalsIgnoreCase(":blaze"))
+            currentParse = HeroicDeathMessages.ParseType.Blaze;
+        else if (thisLine.equalsIgnoreCase(":magmacube"))
+            currentParse = HeroicDeathMessages.ParseType.MagmaCube;
         else if (thisLine.equalsIgnoreCase(":giant"))
             currentParse = HeroicDeathMessages.ParseType.Giant;
         else if (thisLine.equalsIgnoreCase(":wolf"))
@@ -221,7 +235,13 @@ public class HeroicDeathMessages
         	  break;
           case CaveSpider:
         	  this.CaveSpiderMessages.add(thisLine);
-        	  break;              
+        	  break;
+          case Enderman:
+        	  this.CaveSpiderMessages.add(thisLine);
+        	  break; 
+          case EnderDragon:
+        	  this.CaveSpiderMessages.add(thisLine);
+        	  break;               
           case Dispenser:
         	this.DispenserMessages.add(thisLine);
         	break;
@@ -355,8 +375,8 @@ public class HeroicDeathMessages
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
-    Spider, Skeleton, Giant, Wolf, CaveSpider, Blaze, 
-    MagmaCube, Silverfish, Lava, Other, Suffocation, 
+    Spider, Skeleton, Giant, Wolf, CaveSpider, Blaze, Enderman,
+    MagmaCube, Silverfish, Lava, Other, Suffocation, EnderDragon,
     Dispenser, Lightning, Suicide, Starvation;
   }
 }

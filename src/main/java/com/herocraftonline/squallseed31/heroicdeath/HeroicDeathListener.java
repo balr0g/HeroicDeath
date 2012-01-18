@@ -254,7 +254,11 @@ public class HeroicDeathListener extends EntityListener {
                                  else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSilverfish) && !HeroicDeath.DeathMessages.SilverfishMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.SilverfishMessages, dc);
                                  else if (dc.getAttacker().equalsIgnoreCase(plugin.mobCaveSpider) && !HeroicDeath.DeathMessages.CaveSpiderMessages.isEmpty())
-					 killString = getMessage(HeroicDeath.DeathMessages.CaveSpiderMessages, dc);                                                     
+					 killString = getMessage(HeroicDeath.DeathMessages.CaveSpiderMessages, dc);
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobEnderman) && !HeroicDeath.DeathMessages.EndermanMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.EndermanMessages, dc); 
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobEnderDragon) && !HeroicDeath.DeathMessages.EnderDragonMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.EnderDragonMessages, dc);                                                                             
 				 else
 					 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
 			 }
