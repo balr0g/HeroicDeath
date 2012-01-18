@@ -19,6 +19,8 @@ import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.Silverfish;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.MagmaCube;
+import org.bukkit.entity.Enderman;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -101,24 +103,28 @@ public class HeroicDeathListener extends EntityListener {
 		 attackerName = plugin.mobZombie;
 	 } else if (damager instanceof Skeleton) {
 		 attackerName = plugin.mobSkeleton;
+         } else if (damager instanceof CaveSpider) {
+		 attackerName = plugin.mobCaveSpider;                 
 	 } else if (damager instanceof Spider) {
 		 attackerName = plugin.mobSpider;
 	 } else if (damager instanceof Creeper) {
 		 attackerName = plugin.mobCreeper;
 	 } else if (damager instanceof Ghast) {
 		 attackerName = plugin.mobGhast;
+         } else if (damager instanceof MagmaCube) {
+		 attackerName = plugin.mobMagmaCube;                   
 	 } else if (damager instanceof Slime) {
 		 attackerName = plugin.mobSlime;
 	 } else if (damager instanceof Wolf) {
 		 attackerName = plugin.mobWolf;
          } else if (damager instanceof Blaze) {
-		 attackerName = plugin.mobBlaze;      
-         } else if (damager instanceof MagmaCube) {
-		 attackerName = plugin.mobMagmaCube;   
-         } else if (damager instanceof CaveSpider) {
-		 attackerName = plugin.mobCaveSpider;
+		 attackerName = plugin.mobBlaze; 
          } else if (damager instanceof Silverfish) {
-		 attackerName = plugin.mobSilverfish;               
+		 attackerName = plugin.mobSilverfish;
+         } else if (damager instanceof Enderman) {
+		 attackerName = plugin.mobEnderman;
+         } else if (damager instanceof EnderDragon) {
+		 attackerName = plugin.mobEnderDragon;                  
 	 } else {
 		 attackerName = plugin.mobMonster;
 	 }
@@ -204,6 +210,7 @@ public class HeroicDeathListener extends EntityListener {
 	 if (event instanceof EntityDamageByEntityEvent) {
 		 EntityDamageByEntityEvent subEvent = (EntityDamageByEntityEvent)event;
 		 damager = subEvent.getDamager();
+                 HeroicDeath.debug("[Debug Damager] "+subEvent.getDamager().toString());
 		 if (subEvent.getCause() == DamageCause.PROJECTILE) {
 			 damager = ((Projectile)damager).getShooter();
 		 }
@@ -216,24 +223,44 @@ public class HeroicDeathListener extends EntityListener {
 			 blockName = "Unknown";
 		 }
 	 }
-	 switch (event.getCause()) {
+         HeroicDeath.debug("[ Debug Entity ]"+event.getCause().toString());
+	// TODO: add POISON MAGIC and CUSTOM event cause!
+         switch (event.getCause()) {
 		case PROJECTILE:
 	 	case ENTITY_ATTACK:
 	 		 if (damager == null) {
 				 dc.setAttacker("Dispenser");
 				 killString = getMessage(HeroicDeath.DeathMessages.DispenserMessages, dc);
+                                 break;
 			 } else if (damager instanceof Player) {
 				 Player attacker = (Player)damager;
 				 dc.setAttacker(HeroicDeath.getPlayerName(attacker));
 				 dc.setMurderWeapon(getMurderWeapon(attacker));
 				 killString = getMessage(HeroicDeath.DeathMessages.PVPMessages, dc);
-			 } else {
-				 dc.setAttacker(getAttackerName(damager));
+                                 HeroicDeath.debug("TRY Player "+ HeroicDeath.DeathMessages.PVPMessages);
+                                 break;
+			 } else if (damager instanceof MagmaCube ) {               
+				 dc.setAttacker(getAttackerName(damager));            
+                                 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
+                                HeroicDeath.debug("TRY MagmaCube "+ HeroicDeath.DeathMessages.MonsterMessages);
+                                 break;
+                         } else if ( damager instanceof CaveSpider ){
+                                  dc.setAttacker(getAttackerName(damager));            
+                                  killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
+                                  HeroicDeath.debug("TRY CaveSpider "+ HeroicDeath.DeathMessages.MonsterMessages);
+                                  break;    
+                         }
+                                 dc.setAttacker(getAttackerName(damager));
+                                 HeroicDeath.debug("[ Debug Entity Damager ]"+dc.getAttacker().toString());
 				 if (dc.getAttacker().equalsIgnoreCase(plugin.mobCreeper) && !HeroicDeath.DeathMessages.CreeperExplosionMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.CreeperExplosionMessages, dc);
 				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobGhast) && !HeroicDeath.DeathMessages.GhastMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.GhastMessages, dc);
-				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSlime) && !HeroicDeath.DeathMessages.SlimeMessages.isEmpty())
+                                 /* else if (dc.getAttacker().equalsIgnoreCase(plugin.mobMagmaCube) && !HeroicDeath.DeathMessages.MagmaCubeMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.MagmaCubeMessages, dc);
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobCaveSpider) && !HeroicDeath.DeathMessages.MonsterMessages.isEmpty())
+					 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc); */
+                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSlime) && !HeroicDeath.DeathMessages.SlimeMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.SlimeMessages, dc);
 				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobZombie) && !HeroicDeath.DeathMessages.ZombieMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.ZombieMessages, dc);
@@ -248,20 +275,15 @@ public class HeroicDeathListener extends EntityListener {
 				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobWolf) && !HeroicDeath.DeathMessages.WolfMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.WolfMessages, dc);
 				 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobBlaze) && !HeroicDeath.DeathMessages.BlazeMessages.isEmpty())
-					 killString = getMessage(HeroicDeath.DeathMessages.BlazeMessages, dc);
-                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobMagmaCube) && !HeroicDeath.DeathMessages.MagmaCubeMessages.isEmpty())
-					 killString = getMessage(HeroicDeath.DeathMessages.MagmaCubeMessages, dc);
+					 killString = getMessage(HeroicDeath.DeathMessages.BlazeMessages, dc);          
                                  else if (dc.getAttacker().equalsIgnoreCase(plugin.mobSilverfish) && !HeroicDeath.DeathMessages.SilverfishMessages.isEmpty())
-					 killString = getMessage(HeroicDeath.DeathMessages.SilverfishMessages, dc);
-                                 else if (dc.getAttacker().equalsIgnoreCase(plugin.mobCaveSpider) && !HeroicDeath.DeathMessages.CaveSpiderMessages.isEmpty())
-					 killString = getMessage(HeroicDeath.DeathMessages.CaveSpiderMessages, dc);
+					 killString = getMessage(HeroicDeath.DeathMessages.SilverfishMessages, dc);                                 
                                  else if (dc.getAttacker().equalsIgnoreCase(plugin.mobEnderman) && !HeroicDeath.DeathMessages.EndermanMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.EndermanMessages, dc); 
                                  else if (dc.getAttacker().equalsIgnoreCase(plugin.mobEnderDragon) && !HeroicDeath.DeathMessages.EnderDragonMessages.isEmpty())
 					 killString = getMessage(HeroicDeath.DeathMessages.EnderDragonMessages, dc);                                                                             
 				 else
-					 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);
-			 }
+					 killString = getMessage(HeroicDeath.DeathMessages.MonsterMessages, dc);			 
 	 		break;
 	 	case BLOCK_EXPLOSION:
 	 		killString = getMessage(HeroicDeath.DeathMessages.ExplosionMessages, dc);

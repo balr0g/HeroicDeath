@@ -112,11 +112,11 @@ public class HeroicDeath extends JavaPlugin
     mobGiant = this.config.getString("monsters.giant", "Giant");
     mobWolf = this.config.getString("monsters.wolf", "Wolf");
     mobBlaze = this.config.getString("monsters.blaze", "Blaze");
-    mobCaveSpider = this.config.getString("monsters.savespider", "SaveSpider");
-    mobMagmaCube = this.config.getString("monsters.mobmagmacube", "MagmaCube");
+    mobCaveSpider = this.config.getString("monsters.cavespider", "CaveSpider");
+    mobMagmaCube = this.config.getString("monsters.magmacube", "MagmaCube");
     mobSilverfish = this.config.getString("monsters.silverfish", "Silverfish");
     mobEnderman = this.config.getString("monsters.enderman", "Enderman");
-    mobEnderDragon = this.config.getString("monsters.enderdragon", "Enderman");
+    mobEnderDragon = this.config.getString("monsters.enderdragon", "EnderDragon");
     useDisplayName = this.config.getBoolean("options.useDisplayName", false);
     serverBroadcast = this.config.getBoolean("options.serverBroadcast", true);
     quietWorlds = this.config.getStringList("options.worlds.quiet");

@@ -237,10 +237,10 @@ public class HeroicDeathMessages
         	  this.CaveSpiderMessages.add(thisLine);
         	  break;
           case Enderman:
-        	  this.CaveSpiderMessages.add(thisLine);
+        	  this.EndermanMessages.add(thisLine);
         	  break; 
           case EnderDragon:
-        	  this.CaveSpiderMessages.add(thisLine);
+        	  this.EnderDragonMessages.add(thisLine);
         	  break;               
           case Dispenser:
         	this.DispenserMessages.add(thisLine);
@@ -259,7 +259,7 @@ public class HeroicDeathMessages
         	break;
           }
         }
-
+        HeroicDeath.debug("[line test message] "+thisLine+" [parse] "+currentParse+" [Zombie mess:] "+this.ZombieMessages.toString());
       }
 
     }
