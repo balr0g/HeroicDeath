@@ -120,7 +120,7 @@ public class HeroicDeath extends JavaPlugin
     useDisplayName = this.config.getBoolean("options.useDisplayName", false);
     serverBroadcast = this.config.getBoolean("options.serverBroadcast", true);
     quietWorlds = this.config.getStringList("options.worlds.quiet");
-    //loudWorlds = this.config.getStringList("options.worlds.loud", new ArrayList<String>());
+    loudWorlds = this.config.getStringList("options.worlds.loud");
     
     try {
     	if (logData)
@@ -246,7 +246,8 @@ public class HeroicDeath extends JavaPlugin
 			if (!loudWorlds.isEmpty()) {
 				for (String s : loudWorlds) {
 					World w = getServer().getWorld(s);
-					if (w == null || w.getName() == dc.getLocation().getWorld().getName()) continue;
+					if (w == null || w.getName().equalsIgnoreCase(dc.getLocation().getWorld().getName())
+                                            ) continue;
 					for (Player p : w.getPlayers()) {
 						p.sendMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
 					}

@@ -41,6 +41,8 @@ public class HeroicDeathMessages
   public ArrayList<String> LightningMessages = new ArrayList<String>();
   public ArrayList<String> SuicideMessages = new ArrayList<String>();
   public ArrayList<String> StarvationMessages = new ArrayList<String>();
+  public ArrayList<String> PoisonMessages = new ArrayList<String>();
+  public ArrayList<String> MagicMessages = new ArrayList<String>();
   public ArrayList<String> OtherMessages = new ArrayList<String>();
   private String location = "heroicdeath.messages";
 
@@ -377,6 +379,6 @@ public class HeroicDeathMessages
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
     Spider, Skeleton, Giant, Wolf, CaveSpider, Blaze, Enderman,
     MagmaCube, Silverfish, Lava, Other, Suffocation, EnderDragon,
-    Dispenser, Lightning, Suicide, Starvation;
+    Dispenser, Lightning, Suicide, Starvation, Poison, Magic;
   }
 }

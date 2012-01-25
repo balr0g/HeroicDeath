@@ -334,7 +334,16 @@ public class HeroicDeathListener extends EntityListener {
 		case STARVATION:
 			killString = getMessage(HeroicDeath.DeathMessages.StarvationMessages, dc);
 			break;
-		default:
+/*         FUTURE ADD ON 1.1 API      
+                case POISON:
+ 			killString = getMessage(HeroicDeath.DeathMessages.PoisonMessages, dc);
+			break;
+                case MAGIC:
+ 			killString = getMessage(HeroicDeath.DeathMessages.MagicMessages, dc);
+			break;   
+              
+ */
+                default:
 		{
 			killString = getMessage(HeroicDeath.DeathMessages.OtherMessages, dc);
 		}
