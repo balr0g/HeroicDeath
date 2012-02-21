@@ -9,7 +9,6 @@ public class HeroicDeathEvent extends Event implements Cancellable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -28983074208940338L;
 	private DeathCertificate dc;
 	private boolean cancel;
 	
