@@ -2,60 +2,30 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.herocraftonline.squallseed31</groupId>
   <version>1.11.1</version>
-  <artifactId>HeroicDeath</artifactId>
+  <artifactId>heroicdeath</artifactId>
   <packaging>jar</packaging>
   <name>HeroicDeath</name>
   <description>Minecraft plugin for Bukkit that announces player deaths.</description>
   <url>http://www.thedarktide.net</url>
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.packageName>com.herocraftonline.squallseed31.heroicdeath</project.packageName>
   </properties>
-  <issueManagement>
-  </issueManagement>
-  <scm>
-  	<connection>scm:git:git://github.com/darkwarriors/HeroicDeath.git</connection>
-  	<developerConnection>scm:git:git@github.com:darkwarriors/HeroicDeath.git</developerConnection>
-  	<url>https://github.com/darkwarriors/HeroicDeath/tree/master/</url>
-  </scm>
   <build>
+	<sourceDirectory>${basedir}/src</sourceDirectory>
     <finalName>${project.artifactId}</finalName>
     <resources>
-        <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-        </resource>
+		<resource>
+	    	<targetPath>.</targetPath>
+	    	<directory>${basedir}/src</directory>
+	    	<filtering>true</filtering>
+	    	<includes>
+	    			<include>plugin.yml</include>
+					<include>config.yml</include>
+					<include>heroicdeath.items</include>
+					<include>heroicdeath.messages</include>
+	    	</includes>
+	    </resource>
     </resources>
-  	<plugins>
-  		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-compiler-plugin</artifactId>
-  			<version>2.3.2</version>
-  			<configuration>
-                  <source>1.6</source>
-                  <target>1.6</target>
-            </configuration>
-  		</plugin>
-  		<plugin>
-  			<groupId>org.apache.maven.plugins</groupId>
-  			<artifactId>maven-assembly-plugin</artifactId>
-  			<version>2.2.1</version>
-  			<configuration>
-				<descriptors>
-				<descriptor>src/main/assembly/package.xml</descriptor>
-				</descriptors>
-			</configuration>
-  			<executions>
-  				<execution>
-  					<id>build</id>
-  					<phase>package</phase>
-  					<goals>
-  						<goal>single</goal>
-  					</goals>
-  				</execution>
-  			</executions>
-  		</plugin>
-  	</plugins>
   </build>
   <dependencies>
  		<dependency>
@@ -76,6 +46,4 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-
-
 </project>
