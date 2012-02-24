@@ -16,7 +16,6 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
 
 import com.herocraftonline.squallseed31.heroicdeath.HeroicDeathListener.RespawnListener;
 
@@ -44,7 +43,7 @@ public class HeroicDeath extends JavaPlugin
 	public static HeroicDeathMessages DeathMessages = new HeroicDeathMessages();
 	public static HeroicDeathItems Items = new HeroicDeathItems();
 	
-	public Configuration config;
+	public HeroicDeathConfig config;
 	public static String messageColor;
 	public static String nameColor;
 	public static String itemColor;
@@ -59,6 +58,12 @@ public class HeroicDeath extends JavaPlugin
 	public String mobSlime;
 	public String mobGiant;
 	public String mobWolf;
+        public String mobBlaze;
+        public String mobMagmaCube;
+        public String mobSilverfish;
+        public String mobCaveSpider;
+        public String mobEnderman;
+        public String mobEnderDragon;
 	public static boolean useDisplayName;
 	public boolean serverBroadcast;
 	public List<String> quietWorlds;
@@ -71,17 +76,20 @@ public class HeroicDeath extends JavaPlugin
 
   public void onEnable()
   {
-	this.config = getConfiguration();
+	//this.config = getConfig();
 	pdfFile = getDescription();
 	name = pdfFile.getName();
 	version = pdfFile.getVersion();
 	dataFolder = getDataFolder();
+        System.out.println(getDataFolder().toString() );
     PluginManager pm = getServer().getPluginManager();
     //pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.ENTITY_DEATH, this.listener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.PLAYER_RESPAWN, this.playerListener, Event.Priority.Monitor, this);
     pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Monitor, this);
 
+    config = new HeroicDeathConfig(new File(getDataFolder(), "config.yml"), this);
+    
     messageColor = getConfigColor("colors.message", "RED");
     nameColor = getConfigColor("colors.name", "DARK_AQUA");
     itemColor = getConfigColor("colors.item", "GOLD");
@@ -103,12 +111,17 @@ public class HeroicDeath extends JavaPlugin
     mobSlime = this.config.getString("monsters.slime", "Slime");
     mobGiant = this.config.getString("monsters.giant", "Giant");
     mobWolf = this.config.getString("monsters.wolf", "Wolf");
+    mobBlaze = this.config.getString("monsters.blaze", "Blaze");
+    mobCaveSpider = this.config.getString("monsters.cavespider", "CaveSpider");
+    mobMagmaCube = this.config.getString("monsters.magmacube", "MagmaCube");
+    mobSilverfish = this.config.getString("monsters.silverfish", "Silverfish");
+    mobEnderman = this.config.getString("monsters.enderman", "Enderman");
+    mobEnderDragon = this.config.getString("monsters.enderdragon", "EnderDragon");
     useDisplayName = this.config.getBoolean("options.useDisplayName", false);
     serverBroadcast = this.config.getBoolean("options.serverBroadcast", true);
-    quietWorlds = this.config.getStringList("options.worlds.quiet", new ArrayList<String>());
-    loudWorlds = this.config.getStringList("options.worlds.loud", new ArrayList<String>());
+    quietWorlds = this.config.getStringList("options.worlds.quiet");
+    loudWorlds = this.config.getStringList("options.worlds.loud");
     
-    saveConfig();
     try {
     	if (logData)
     		this.dataLog = new File(dataFolder, dLog);
@@ -211,36 +224,7 @@ public class HeroicDeath extends JavaPlugin
 			}
 	  }
   }
-  
-  private void saveConfig() {
-	  this.config.setProperty("colors.message", this.config.getString("colors.message", "RED"));
-	  this.config.setProperty("colors.name", this.config.getString("colors.name", "DARK_AQUA"));
-	  this.config.setProperty("colors.item", this.config.getString("colors.item", "GOLD"));
-	  this.config.setProperty("log.data", logData);
-	  this.config.setProperty("log.messages", logMessages);
-	  this.config.setProperty("log.time.format", timestampFormat);
-	  this.config.setProperty("log.files.data", dLog);
-	  this.config.setProperty("log.files.messages", mLog);
-	  this.config.setProperty("events.only", eventsOnly);
-	  this.config.setProperty("monsters.unknown", mobUnknown);
-	  this.config.setProperty("monsters.monster", mobMonster);
-	  this.config.setProperty("monsters.pigzombie", mobPigZombie);
-	  this.config.setProperty("monsters.zombie", mobZombie);
-	  this.config.setProperty("monsters.skeleton", mobSkeleton);
-	  this.config.setProperty("monsters.spider", mobSpider);
-	  this.config.setProperty("monsters.creeper", mobCreeper);
-	  this.config.setProperty("monsters.ghast", mobGhast);
-	  this.config.setProperty("monsters.slime", mobSlime);
-	  this.config.setProperty("monsters.giant", mobGiant);
-	  this.config.setProperty("monsters.wolf", mobWolf);
-	  this.config.setProperty("options.useDisplayName", useDisplayName);
-	  this.config.setProperty("options.serverBroadcast", serverBroadcast);
-	  this.config.setProperty("options.worlds.quiet", quietWorlds);
-	  this.config.setProperty("options.worlds.loud", loudWorlds);
 
-	  this.config.save();
-  }
-  
   public static String getPlayerName(Player p) {
 	  if (useDisplayName) return p.getDisplayName();
 	  return p.getName();
@@ -262,7 +246,8 @@ public class HeroicDeath extends JavaPlugin
 			if (!loudWorlds.isEmpty()) {
 				for (String s : loudWorlds) {
 					World w = getServer().getWorld(s);
-					if (w == null || w.getName() == dc.getLocation().getWorld().getName()) continue;
+					if (w == null || w.getName().equalsIgnoreCase(dc.getLocation().getWorld().getName())
+                                            ) continue;
 					for (Player p : w.getPlayers()) {
 						p.sendMessage(HeroicDeath.messageColor + dc.getMessage() + " ");
 					}

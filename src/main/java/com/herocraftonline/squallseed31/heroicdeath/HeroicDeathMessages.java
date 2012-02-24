@@ -28,6 +28,12 @@ public class HeroicDeathMessages
   public ArrayList<String> SpiderMessages = new ArrayList<String>();
   public ArrayList<String> SkeletonMessages = new ArrayList<String>();
   public ArrayList<String> GiantMessages = new ArrayList<String>();
+  public ArrayList<String> CaveSpiderMessages = new ArrayList<String>();
+  public ArrayList<String> BlazeMessages = new ArrayList<String>();
+  public ArrayList<String> MagmaCubeMessages = new ArrayList<String>();
+  public ArrayList<String> SilverfishMessages = new ArrayList<String>();
+  public ArrayList<String> EndermanMessages = new ArrayList<String>();
+  public ArrayList<String> EnderDragonMessages = new ArrayList<String>();
   public ArrayList<String> WolfMessages = new ArrayList<String>();
   public ArrayList<String> LavaMessages = new ArrayList<String>();
   public ArrayList<String> SuffocationMessages = new ArrayList<String>();
@@ -35,6 +41,8 @@ public class HeroicDeathMessages
   public ArrayList<String> LightningMessages = new ArrayList<String>();
   public ArrayList<String> SuicideMessages = new ArrayList<String>();
   public ArrayList<String> StarvationMessages = new ArrayList<String>();
+  public ArrayList<String> PoisonMessages = new ArrayList<String>();
+  public ArrayList<String> MagicMessages = new ArrayList<String>();
   public ArrayList<String> OtherMessages = new ArrayList<String>();
   private String location = "heroicdeath.messages";
 
@@ -125,6 +133,18 @@ public class HeroicDeathMessages
             currentParse = HeroicDeathMessages.ParseType.Spider;
         else if (thisLine.equalsIgnoreCase(":skeleton"))
             currentParse = HeroicDeathMessages.ParseType.Skeleton;
+        else if (thisLine.equalsIgnoreCase(":enderman"))
+            currentParse = HeroicDeathMessages.ParseType.Enderman;
+        else if (thisLine.equalsIgnoreCase(":enderdragon"))
+            currentParse = HeroicDeathMessages.ParseType.EnderDragon;
+        else if (thisLine.equalsIgnoreCase(":silverfish"))
+            currentParse = HeroicDeathMessages.ParseType.Silverfish;
+        else if (thisLine.equalsIgnoreCase(":cavespider"))
+            currentParse = HeroicDeathMessages.ParseType.CaveSpider;
+        else if (thisLine.equalsIgnoreCase(":blaze"))
+            currentParse = HeroicDeathMessages.ParseType.Blaze;
+        else if (thisLine.equalsIgnoreCase(":magmacube"))
+            currentParse = HeroicDeathMessages.ParseType.MagmaCube;
         else if (thisLine.equalsIgnoreCase(":giant"))
             currentParse = HeroicDeathMessages.ParseType.Giant;
         else if (thisLine.equalsIgnoreCase(":wolf"))
@@ -206,6 +226,24 @@ public class HeroicDeathMessages
           case Giant:
         	  this.GiantMessages.add(thisLine);
         	  break;
+          case Silverfish:
+        	  this.SilverfishMessages.add(thisLine);
+        	  break;
+          case Blaze:
+        	  this.BlazeMessages.add(thisLine);
+        	  break;
+          case MagmaCube:
+        	  this.MagmaCubeMessages.add(thisLine);
+        	  break;
+          case CaveSpider:
+        	  this.CaveSpiderMessages.add(thisLine);
+        	  break;
+          case Enderman:
+        	  this.EndermanMessages.add(thisLine);
+        	  break; 
+          case EnderDragon:
+        	  this.EnderDragonMessages.add(thisLine);
+        	  break;               
           case Dispenser:
         	this.DispenserMessages.add(thisLine);
         	break;
@@ -223,7 +261,7 @@ public class HeroicDeathMessages
         	break;
           }
         }
-
+        HeroicDeath.debug("[line test message] "+thisLine+" [parse] "+currentParse+" [Zombie mess:] "+this.ZombieMessages.toString());
       }
 
     }
@@ -316,7 +354,7 @@ public class HeroicDeathMessages
 	      }
 	    }
 	  }
-      HeroicDeath.log.info("Default message file created for HeroicDeath.");
+    HeroicDeath.log.info("Default message file created for HeroicDeath.");
     this.DrownMessages.add("%d drowned");
     this.CactusMessages.add("%d poked a cactus, but the cactus poked back.");
     this.FireMessages.add("%d burned to death");
@@ -339,7 +377,8 @@ public class HeroicDeathMessages
   {
     NONE, Drown, Cactus, Fire, Creeper, Explosion, 
     Fall, PVP, Void, Monster, Ghast, Slime, Zombie, PigZombie, 
-    Spider, Skeleton, Giant, Wolf, Lava, Other, Suffocation, 
-    Dispenser, Lightning, Suicide, Starvation;
+    Spider, Skeleton, Giant, Wolf, CaveSpider, Blaze, Enderman,
+    MagmaCube, Silverfish, Lava, Other, Suffocation, EnderDragon,
+    Dispenser, Lightning, Suicide, Starvation, Poison, Magic;
   }
 }
